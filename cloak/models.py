@@ -11,3 +11,6 @@ class Url(models.Model):
 
   def __str__(self):
     return self.obfuscated_url
+
+  def __str__(self):
+    return self.obfuscated_url_click_counter
