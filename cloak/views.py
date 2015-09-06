@@ -7,4 +7,12 @@ def index(request):
   return render(request, 'cloak/index.html')
 
 def new_url(request):
-  return render(request, 'cloak/new_url.html')
+  original_url = request.POST['user_added_url']
+
+  encrypted_url = original_url + '/abc'
+
+  final_url = Url(user_added_url = original_url, obfuscated_url = encrypted_url)
+  
+  final_url.save()
+
+  return render(request, 'cloak/new_url.html', { 'final_url' : final_url })
