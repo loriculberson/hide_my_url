@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .models import Url
+
+def index(request):
+  return render(request, 'cloak/index.html')
+

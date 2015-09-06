@@ -1,0 +1,11 @@
+<h1> Pimp My Url </h1>
+{% if error_message %}<p> <strong>{{ error_message }}</strong> </p>{% endif %}
+
+<p> To create an obfuscated web link, add your web link in the box below and click submit. </p>
+
+<form >
+  {% csrf_token %}
+
+  <input type="text" name="new-url" id="new-url" size="50"/><br>
+  <input type="submit" value="Create New Link" />
+</form>
