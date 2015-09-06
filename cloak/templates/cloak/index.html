@@ -3,9 +3,9 @@
 
 <p> To create an obfuscated web link, add your web link in the box below and click submit. </p>
 
-<form >
+<form action="{% url 'cloak:new_url'%}" method="post">
   {% csrf_token %}
 
-  <input type="text" name="new-url" id="new-url" size="50"/><br>
+  <input type="text" name="user-added-url" id="user-added-url" size="50"/><br>
   <input type="submit" value="Create New Link" />
 </form>

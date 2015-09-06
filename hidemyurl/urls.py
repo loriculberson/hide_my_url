@@ -17,6 +17,6 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-  url(r'^cloak/', include('cloak.urls')),
+  url(r'^cloak/', include('cloak.urls', namespace="cloak")),
   url(r'^admin/', include(admin.site.urls)),
 ]
