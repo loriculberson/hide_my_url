@@ -18,12 +18,11 @@ def new_url(request):
   try:
     final_url = Url.objects.get(user_added_url = original_url)
   except Url.DoesNotExist:
-
     encrypted_code = get_random_string(length=11)
     encrypted_url = original_url + '/' + encrypted_code
 
     final_url = Url(user_added_url = original_url, obfuscated_url = encrypted_url)
-
     final_url.save()
-
-  return render(request, 'cloak/new_url.html', { 'final_url' : final_url })
+  
+  urls = Url.objects.order_by('-id')
+  return render(request, 'cloak/new_url.html', { 'final_url' : final_url, 'urls' : urls })
