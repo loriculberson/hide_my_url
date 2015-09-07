@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.utils.crypto import get_random_string
 
 from .models import Url
 
@@ -7,7 +8,8 @@ def index(request):
   return render(request, 'cloak/index.html')
 
 def new_url(request):
-  encrypted_code = 'random123'
+  encrypted_code = get_random_string(length=11)
+
   original_url = request.POST['user_added_url']
   
   if original_url.startswith('http://'):
