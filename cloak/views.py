@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.utils.crypto import get_random_string
 
@@ -14,15 +14,23 @@ def new_url(request):
     original_url = user_input
   else:
     original_url = 'http://' + user_input
-
+ 
   try:
     final_url = Url.objects.get(user_added_url = original_url)
   except Url.DoesNotExist:
-    encrypted_code = get_random_string(length=11)
-    encrypted_url = original_url + '/' + encrypted_code
+    code = get_random_string(length=11)
 
-    final_url = Url(user_added_url = original_url, obfuscated_url = encrypted_url)
+    final_url = Url(user_added_url = original_url, obfuscated_key = code)
     final_url.save()
   
   urls = Url.objects.order_by('-id')
   return render(request, 'cloak/new_url.html', { 'final_url' : final_url, 'urls' : urls })
+
+def hit_counter(request, code):
+  url = Url.objects.get(obfuscated_key = code)
+  url.obfuscated_url_click_counter +=1
+  url.save()
+  return redirect(url.user_added_url)
+
+
+
