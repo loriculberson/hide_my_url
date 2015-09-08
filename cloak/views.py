@@ -28,6 +28,8 @@ def new_url(request):
 
 def hit_counter(request, code):
   url = Url.objects.get(obfuscated_key = code)
+  url.obfuscated_url_click_counter +=1
+  url.save()
   return redirect(url.user_added_url)
 
 

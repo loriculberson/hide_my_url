@@ -1,7 +1,7 @@
 <h1> Your New Url </h1>
 
 <h3> {{ final_url.user_added_url }} </h3>
-<h3><a href="{% url 'cloak:hit_counter' final_url.obfuscated_key %}">{{ final_url.obfuscated_key }}</a></h3>
+<h3>Code: <a href="{% url 'cloak:hit_counter' final_url.obfuscated_key %}">{{ final_url.obfuscated_key }}</a></h3>
 
 <table>
     <tr>
@@ -10,7 +10,6 @@
     {% for url in urls %}
     <tr>
       <td><a href="{% url 'cloak:hit_counter' url.obfuscated_key %}">http://localhost:8000{% url 'cloak:hit_counter' url.obfuscated_key %}</a></td>
-      <td>{{ url.obfuscated_url_click_counter }}</td>
     </tr>
   {% endfor %}
 </table>
